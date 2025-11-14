@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 /**
  * Enum per le attività prevalenti di un artista.
- * Supporta ricerca per nome enum o alias (case-insensitive).
  * Se non trovato → ALTRO
  */
 
@@ -22,17 +21,18 @@ public enum AttivitaPrevalente {
     private final String label; //es pittura
     private final String[] aliases; //es pittrice
 
-/** Mappa per ricerca rapida: chiave maiuscola → valore enum */
+/** Mappa per ricerca rapida di alias e nomi chiave maiuscola → valore enum */
     private static final Map<String, AttivitaPrevalente> LOOKUP = new HashMap<>();
 
-    //static = eseguito 1 volta
+    //mappa inizializzata 1 volta
+    
     static {
         
         for (AttivitaPrevalente attivita : values()) { //scorrimento tutti valori
             
-            LOOKUP.put(attivita.name().toUpperCase(), attivita);  //aggiunta all'enum in maiuscolo
+            LOOKUP.put(attivita.name().toUpperCase(), attivita);  //nome enum
             
-            for (String a : attivita.aliases) {    //aggiunta ogni allias in maiuscolo
+            for (String a : attivita.aliases) {    //aggiunta allias 
                 
                 LOOKUP.put(a.toUpperCase(), attivita);    //put = aggiunge la chiave, se ce gia la aggiorna
             }
@@ -40,7 +40,7 @@ public enum AttivitaPrevalente {
     }
 
 /**
-     * Costruttore con descrizione e alias variadici.
+     * Costruttore con descrizione e alias.
      * @param descrizione nome formale (es. "Pittura")
      * @param alias vari termini associati (es. "pittore")
      *String... = puo contenere sequenza caratteri
@@ -64,10 +64,10 @@ public enum AttivitaPrevalente {
     }
 
 /**
-     * Converte una stringa in AttivitaPrevalente.
-     * Accetta: nome enum, alias, o qualsiasi variante case-insensitive.
-     * @param input stringa da convertire (non null, non vuota)
-     * @return valore corrispondente, o {@link #ALTRO} se non trovato
+     * Converte stringa in enum
+     * Accetta: nome enum, alias, o altri varianti case-insensitive.
+     * @param input stringa da convertire 
+     * @return valore corrispondente, o ALTRO se non trovato
      * @throws IllegalArgumentException se input è null o vuoto
 */
     
@@ -80,7 +80,8 @@ public enum AttivitaPrevalente {
         String chiave = input.trim().toUpperCase();
         
         return LOOKUP.getOrDefault(chiave, ALTRO);
-        //cerca nella mappa se trova -> valore se no -> altro
+        //getOrDefault cerca nella mappa se trova -> valore se no -> altro
     }
 
 }
+
