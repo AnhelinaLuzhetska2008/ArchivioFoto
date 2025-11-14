@@ -27,13 +27,13 @@ public class Artista extends Personaggio {
         
         String attivitaValidata = validateActivity(attivita);
         
-        //daStringa = converte la stringa in enum
+        //daStringa = converte la stringa in enum; vedo se sta nell'enum
         this.tipoAttivita = AttivitaPrevalente.daStringa(attivitaValidata);
         
         if (this.tipoAttivita == AttivitaPrevalente.ALTRO) {
-            
+            //se non è nell'enum salvo come testo
             this.attivitaCustom = attivitaValidata;
-            this.descrizioneAttivita = attivitaValidata; // Usa il testo personalizzato
+            this.descrizioneAttivita = attivitaValidata; 
         } 
             
         else {
@@ -80,4 +80,5 @@ public class Artista extends Personaggio {
     
     }
 }
+
 
