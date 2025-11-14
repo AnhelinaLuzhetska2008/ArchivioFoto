@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public abstract class Soggetto {
     
-    private final String key; 
+    private final String key; //final = immodificabile
     
 /**
      * Costruisce un Soggetto con chiave valida.
@@ -18,16 +18,16 @@ public abstract class Soggetto {
 
     public Soggetto(String key) {
         
-        if (key == null || key.trim().isEmpty()) {   
+        if (key == null || key.trim().isEmpty()) {   //trim = rimuove tutti gli spazi bianchi all’inizio e alla fine della stringa
             
-            throw new IllegalArgumentException("La chiave non può essere vuota o nulla.");
+            throw new IllegalArgumentException ("\nQuesto campo non puo essere vuoto, perfavore inserisca la chiave (puo contere solo numeri e lettere!)");
         }
         
         String normalized = key.trim().toUpperCase();
         
-        if (!normalized.matches("[A-Z0-9]+")) {
+        if (!normalized.matches("[A-Z0-9]+")) {  //matches = vede se tutta la stringa corrisponde, se no ! e lancia la eccezione
             
-            throw new IllegalArgumentException("Chiave può contenere solo lettere maiuscole e numeri. '");
+            throw new IllegalArgumentException("\nChiave può contenere solo lettere e numeri, perfavore inserisca la chiave giusta!");
         }
 
         this.key = normalized;
@@ -41,7 +41,8 @@ public abstract class Soggetto {
     public abstract String getDescription();
     
     /**
-     * Verifica se la chiave contiene la query (case-insensitive, trimmed).
+     * Verifica se la chiave contiene la query 
+     * Query = stringa di ricerca inserita dall’utente per trovare un soggetto nella chiave.
      * @param query stringa da cercare (può essere null)
      * @return true se la chiave contiene la query
      */
@@ -52,19 +53,23 @@ public abstract class Soggetto {
         
         return false;
     }
+
+    //true se parte è dentro key, false altrimenti.
     return key.contains(query.trim().toUpperCase());
 }
 
     @Override
-    
+
+    //true se due oggetti sono lo stesso soggetto (stessa classe + stessa chiave)
     public boolean equals(Object o) {
         
         if (this == o){
             
             return true;
         }
-        
-        if (!(o instanceof Soggetto s)) { //Controlla se un oggetto appartiene a una certa classe
+
+        //Controlla se un oggetto appartiene a una certa classe
+        if (!(o instanceof Soggetto s)) { 
             
             return false;
         }
@@ -75,15 +80,19 @@ public abstract class Soggetto {
     @Override
     public int hashCode() {     //restituisce un numero intero basato sulla stringa
         
-        return Objects.hash(key);
+        return Objects.hash(key);    //hash per evitare collisioni e per ricerca piu veloce
     }
 
     @Override
     public String toString() {
+
+        //String.format(...) → crea una stringa formattata con valori inseriti
+        //sostituisce %s con i valori in ordine
         
         return String.format("%s[chiave=%s]", getClass().getSimpleName(), key);
     }
 }
 /**
  * getClass() prende la classe reale, getSimpleName() solo il nome. Così toString() funziona per tutte le sottoclassi
+
  */
