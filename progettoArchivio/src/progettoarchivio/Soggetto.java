@@ -18,16 +18,16 @@ public abstract class Soggetto {
 
     public Soggetto(String key) {
         
-        if (key == null || key.trim().isEmpty()) {   //trim = rimuove tutti gli spazi bianchi all’inizio e alla fine della stringa
+        if (key == null || key.trim().isEmpty()) {   //trim = tolgo spazi all'inizio e fine
             
             throw new IllegalArgumentException ("\nQuesto campo non puo essere vuoto, perfavore inserisca la chiave (puo contere solo numeri e lettere!)");
         }
         
         String normalized = key.trim().toUpperCase();
         
-        if (!normalized.matches("[A-Z0-9]+")) {  //matches = vede se tutta la stringa corrisponde, se no ! e lancia la eccezione
+        if (!normalized.matches("[A-Z0-9]+")) {  //matches = controlla che siano solo lettere e numeri, se no ! e lancia la eccezione
             
-            throw new IllegalArgumentException("\nChiave può contenere solo lettere e numeri, perfavore inserisca la chiave giusta!");
+            throw new IllegalArgumentException("\nLa chiave può contenere solo lettere e numeri, perfavore inserisca la chiave giusta!");
         }
 
         this.key = normalized;
@@ -49,18 +49,18 @@ public abstract class Soggetto {
     
     public boolean matchesKey(String query) {
         
-    if (query == null) {
+    if (query == null) {    //se il campo è vuoto non posso ricercarlo
         
         return false;
     }
 
-    //true se parte è dentro key, false altrimenti.
+    //true se parte è dentro key, false altrimenti es: chiave=ABC123, query=123 → true
     return key.contains(query.trim().toUpperCase());
 }
 
     @Override
 
-    //true se due oggetti sono lo stesso soggetto (stessa classe + stessa chiave)
+    //true se due oggetti sono lo stesso soggetto (stessa classe + stessa chiave) -> evito confusione
     public boolean equals(Object o) {
         
         if (this == o){
@@ -80,19 +80,20 @@ public abstract class Soggetto {
     @Override
     public int hashCode() {     //restituisce un numero intero basato sulla stringa
         
-        return Objects.hash(key);    //hash per evitare collisioni e per ricerca piu veloce
+        return Objects.hash(key);    //hash per confrontare più velocemente gli oggetti
     }
 
     @Override
     public String toString() {
 
         //String.format(...) → crea una stringa formattata con valori inseriti
-        //sostituisce %s con i valori in ordine
+        //s% = stampa nome classe e chiave ordinati in modo leggibile
         
         return String.format("%s[chiave=%s]", getClass().getSimpleName(), key);
     }
 }
 /**
- * getClass() prende la classe reale, getSimpleName() solo il nome. Così toString() funziona per tutte le sottoclassi
+ * getClass() prende la classe reale, getSimpleName() solo il nome per avere solo il nome della classe, senza il pacchetto
 
  */
+
