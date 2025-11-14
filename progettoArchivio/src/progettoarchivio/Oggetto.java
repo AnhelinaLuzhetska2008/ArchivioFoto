@@ -1,7 +1,7 @@
 package progettoarchivio;
 
 /**
- * Rappresenta un oggetto inanimato fotografato.
+ * Rappresenta un oggetto inanimato fotografato
  * Estende Soggetto con chiave univoca.
  */
 
@@ -11,10 +11,10 @@ public class Oggetto extends Soggetto {
     private final String descrizione;
     
     /**
-     * Costruisce un Oggetto.
+     * Costruisce Oggetto.
      * @param key chiave univoca (validata in Soggetto)
-     * @param nome nome dell'oggetto (obbligatorio, trimmed)
-     * @param descrizione descrizione opzionale (può essere null)
+     * @param nome nome oggetto 
+     * @param descrizione = descrizione opzionale 
      * @throws IllegalArgumentException se nome è null o vuoto
      */
 
@@ -30,7 +30,7 @@ public class Oggetto extends Soggetto {
         
         if (nome == null || nome.trim().isEmpty()){
             
-            throw new IllegalArgumentException("Il nome dell'oggetto è obbligatorio.");
+            throw new IllegalArgumentException("\nQuesto campo è obbligatorio, per favore inserisca il nome dell'oggetto!");
         }
         return nome.trim();
     }
@@ -58,4 +58,5 @@ public class Oggetto extends Soggetto {
         
         return String.format("%s - %s", super.toString(), getDescription());
     }
+
 }
