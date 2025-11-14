@@ -13,13 +13,13 @@ public class OperaArte extends Soggetto {
     private final int anno;
 
     /**
-     * Costruisce un'OperaArte.
-     * @param key chiave univoca (validata in Soggetto)
-     * @param nomeOpera nome dell'opera (obbligatorio, trimmed)
-     * @param artista nome dell'artista (obbligatorio, trimmed)
-     * @param luogo luogo dell'opera (obbligatorio, trimmed)
-     * @param anno anno di creazione (0 ≤ anno ≤ 2100)
-     * @throws IllegalArgumentException se parametri invalidi
+     * Costruisce OperaArte.
+     * @param key = chiave univoca (validata in Soggetto)
+     * @param nomeOpera = nome dell'opera 
+     * @param artista = nome dell'artista 
+     * @param luogo = luogo dell'opera 
+     * @param anno = anno di creazione 
+     * @throws IllegalArgumentException se parametri non validi
      */
     
     public OperaArte(String key, String nomeOpera, String artista, String luogo, int anno) {
@@ -36,7 +36,7 @@ public class OperaArte extends Soggetto {
         
         if (nome == null || nome.trim().isEmpty()){
             
-            throw new IllegalArgumentException("E' obbligatorio inserire il nome dell'opera.");
+            throw new IllegalArgumentException("\nQuesto campo è obbligatorio, perfavore inserisca il nome dell'opera!");
         }
         return nome.trim();
     }
@@ -45,7 +45,7 @@ public class OperaArte extends Soggetto {
         
         if (artista == null || artista.trim().isEmpty()) {
             
-            throw new IllegalArgumentException("E' obbligatorio inserire il nome dell'artista.");
+            throw new IllegalArgumentException("\nQuesto campo è obbligatorio, perfavore inserisca il n ome dell'artista!");
         }
         return artista.trim();
     }
@@ -54,18 +54,18 @@ public class OperaArte extends Soggetto {
         
         if (luogo == null || luogo.trim().isEmpty()){
             
-            throw new IllegalArgumentException("E' obbligatorio inserire il luogo dell'opera.");
+            throw new IllegalArgumentException("\nQuesto campo è obbligatorio, perfavore inserisca il luogo dell'opera!");
         }
         return luogo.trim();
     }
 
     private int validaAnno(int anno) {
         
-        if (anno < 0 || anno > 2100){
+        if (anno < 0 || anno > 2026){
             
             throw new IllegalArgumentException(
                     
-                    String.format("Anno inserito non valido: %d. Deve essere tra 0 e 2025", anno)
+                    String.format("L'anno inserito non è valido: %d. Perfavore inserisca un valore tra 0 e 2026", anno)
             );
         }
         return anno;
@@ -104,4 +104,5 @@ public class OperaArte extends Soggetto {
         
         return String.format("%s - %s", super.toString(), getDescription());
     }
+
 }
