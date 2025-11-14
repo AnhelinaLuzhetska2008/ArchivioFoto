@@ -5,8 +5,8 @@ import java.util.HashMap;
 
 /**
  * Enum per le attività prevalenti di un artista.
- * Supporta lookup per nome enum o alias (case-insensitive).
- * Se non trovato → {@link #ALTRO}.
+ * Supporta ricerca per nome enum o alias (case-insensitive).
+ * Se non trovato → ALTRO
  */
 
 public enum AttivitaPrevalente {
@@ -25,16 +25,16 @@ public enum AttivitaPrevalente {
 /** Mappa per ricerca rapida: chiave maiuscola → valore enum */
     private static final Map<String, AttivitaPrevalente> LOOKUP = new HashMap<>();
 
-    //static eseguito 1 volta
+    //static = eseguito 1 volta
     static {
         
         for (AttivitaPrevalente attivita : values()) { //scorrimento tutti valori
             
             LOOKUP.put(attivita.name().toUpperCase(), attivita);  //aggiunta all'enum in maiuscolo
             
-            for (String a : attivita.aliases) {    //aggiunta ogni allias in maiusc
+            for (String a : attivita.aliases) {    //aggiunta ogni allias in maiuscolo
                 
-                LOOKUP.put(a.toUpperCase(), attivita);
+                LOOKUP.put(a.toUpperCase(), attivita);    //put = aggiunge la chiave, se ce gia la aggiorna
             }
         }
     }
@@ -43,6 +43,7 @@ public enum AttivitaPrevalente {
      * Costruttore con descrizione e alias variadici.
      * @param descrizione nome formale (es. "Pittura")
      * @param alias vari termini associati (es. "pittore")
+     *String... = puo contenere sequenza caratteri
 */
     
     AttivitaPrevalente(String label, String... aliases) {
@@ -74,11 +75,12 @@ public enum AttivitaPrevalente {
         
         if (input == null || input.trim().isEmpty()) {
             
-            throw new IllegalArgumentException("L'attività prevalente è obbligatoria e non può essere vuota.");
+            throw new IllegalArgumentException("Questo campo è obbligatorio, perfavore inserisca l'attività prevalente!");
         }
         String chiave = input.trim().toUpperCase();
         
         return LOOKUP.getOrDefault(chiave, ALTRO);
         //cerca nella mappa se trova -> valore se no -> altro
     }
+
 }
