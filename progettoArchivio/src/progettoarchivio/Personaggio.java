@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.time.Year;
 
 /**
- * Rappresenta un personaggio umano (vivo o deceduto).
+ * Rappresenta una persona (vivo o morta)
  * Estende Soggetto con chiave univoca.
  */
 
@@ -14,18 +14,18 @@ public class Personaggio extends Soggetto {
     
     private final String nome;
     
-    private final Genere sesso; // m, w, 0 = other
+    private final Genere sesso; // m, f, a
     
     private final int nascita;
     
     private final boolean morte;
     
    /**
-     * Costruisce un Personaggio.
-     * @param key chiave univoca (validata in Soggetto)
-     * @param nome nome completo (obbligatorio, trimmed)
-     * @param sesso 'M', 'F' o '0' (altro)
-     * @param morte true se morto
+     * Costruisce Personaggio.
+     * @param key = chiave univoca (validata in Soggetto)
+     * @param nome = nome completo 
+     * @param sesso 'M', 'F' o 'A'
+     * @param morte = true se morto
      * @param nascita anno di nascita (0 <= anno <= anno corrente)
      * @throws IllegalArgumentException se parametri invalidi
      */
@@ -45,7 +45,7 @@ public class Personaggio extends Soggetto {
         
         if (name == null || name.trim().isEmpty()) {
             
-            throw new IllegalArgumentException("Il nome è obbligatorio.");
+            throw new IllegalArgumentException("\nQuesto campo è obbligatorio, perfavore inserisca il nome!");
         }
         return name.trim();
     }
@@ -55,7 +55,7 @@ public class Personaggio extends Soggetto {
         
         if (anno < 0 || anno > ANNO_CORRENTE) {
             
-    throw new IllegalArgumentException(String.format("Anno di nascita invalido: %d. Deve essere tra 0 e %d.", anno, ANNO_CORRENTE));
+    throw new IllegalArgumentException(String.format("L'nno di nascita è invalido: %d. Perfavore inserisca un valore tra 0 e %d.", anno, ANNO_CORRENTE));
         }
         return anno;
     }
@@ -118,5 +118,6 @@ public class Personaggio extends Soggetto {
     }
 
 }
+
 
 //?: if else
