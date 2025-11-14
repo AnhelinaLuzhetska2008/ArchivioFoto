@@ -1,8 +1,8 @@
 package progettoarchivio;
 
 /**
- * Enum per rappresentare il genere di una persona.
- * Valori: M (Maschio), F (Femmina), A (Altro).
+ * Enum per rappresentare il sesso di una persona.
+ * M (Maschio), F (Femmina), A (Altro).
  */
 
 public enum Genere {
@@ -13,7 +13,7 @@ public enum Genere {
 
     private final String descrizione;
 
-    /** Costruttore privato per inizializzare la descrizione leggibile. */
+    /** Costruttore privato per la descrizione leggibile. */
 
     Genere(String descrizione) {
         
@@ -35,7 +35,7 @@ public enum Genere {
      * Converte un char in Genere.
      * @param c carattere ('M', 'm', 'F', f', 'A', 'a')
      * @return sesso corrispondente
-     * @throws IllegalArgumentException se il carattere è invalido
+     * @throws IllegalArgumentException se non valido
      */
     
     public static Genere daChar(char c) {
@@ -47,24 +47,24 @@ public enum Genere {
             case 'A' -> A;
             default -> throw new IllegalArgumentException(
                     
-                "Genere non valido: '%c'. Usa 'M', 'F' oppure 'A'.".formatted(c)
+                "\nGenere non valido: '%c'. Perfavore inserisca 'M' per maschio, 'F' per femmina oppure 'A' per altro!".formatted(c)
             );
         };
     }
     
     /**
-     * Converte una stringa in Genere (case-insensitive).
-     * Accetta: "M", "MASCHIO", "MAN", "W", "FEMMINA", "WOMAN", "O", "ALTRO", "OTHER".
-     * @param s stringa da convertire (non null)
+     * Converte una stringa in Genere 
+     * Accetta: "M", "MASCHIO", "F", "FEMMINA", "A", "ALTRO"
+     * @param s = stringa da convertire 
      * @return Genere corrispondente
-     * @throws IllegalArgumentException se la stringa è invalida o null
+     * @throws IllegalArgumentException se stringa non valida
      */
     
     public static Genere fromString(String s) {
         
         if (s == null) {
             
-            throw new IllegalArgumentException("Il genere è obbligatorio e non può essere vuoto.");
+            throw new IllegalArgumentException("\nQuesto campo è obbligatorio, perfavore inserisca il sesso!");
         }
     
     return switch (s.trim().toUpperCase()) {
@@ -73,7 +73,8 @@ public enum Genere {
         case "F", "FEMMINA" -> F;
         case "A", "ALTRO"-> A;
             
-        default -> throw new IllegalArgumentException("Genere non valido: '%s'.".formatted(s));
+        default -> throw new IllegalArgumentException("Sesso non valido: '%s'.".formatted(s));
     };
 }
+
 }
