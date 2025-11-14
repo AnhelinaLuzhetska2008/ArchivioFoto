@@ -1,4 +1,6 @@
-//Politico con partito e carica governativa.
+/**
+    *Politico con partito e carica governativa.
+*/
 package progettoarchivio;
 
 public class Politico extends Personaggio {
@@ -32,7 +34,7 @@ public class Politico extends Personaggio {
     
     public String getCarica() { 
         
-        return carica.isEmpty() ? "Nessuna" : carica; //scrive nessuna se l'utente lascia vuoto
+        return carica.isEmpty() ? "Nessuna" : carica;     //scrive nessuna se l'utente lascia vuoto
     
     }
 
@@ -42,4 +44,5 @@ public class Politico extends Personaggio {
         
         return super.getDescription() + " - " + partito + (carica.isEmpty() ? "" : ", " + carica);
     }
+
 }
