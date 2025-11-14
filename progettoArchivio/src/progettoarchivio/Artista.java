@@ -8,19 +8,17 @@ package progettoarchivio;
 public class Artista extends Personaggio {
     
     private final AttivitaPrevalente tipoAttivita;
-    
     private final String attivitaCustom;
-    
     private final String descrizioneAttivita;
     
     /**
      * Costruisce un Artista.
      * @param key chiave univoca (validata in Soggetto)
-     * @param nome nome
-     * @param sesso 'M' o 'F'
+     * @param nome = nome
+     * @param sesso = 'M', 'F', 'A'
      * @param morte true se deceduto
-     * @param nascita anno di morte
-     * @param attivita attività prevalente (obbligatoria, trimmed)
+     * @param nascita anno di nascita
+     * @param attivita = attività prevalente (obbligatoria, trimmed)
      */
 
     public Artista(String key, String nome, char sesso, boolean morte, int nascita, String attivita) {
@@ -29,6 +27,7 @@ public class Artista extends Personaggio {
         
         String attivitaValidata = validateActivity(attivita);
         
+        //daStringa = converte la stringa in enum
         this.tipoAttivita = AttivitaPrevalente.daStringa(attivitaValidata);
         
         if (this.tipoAttivita == AttivitaPrevalente.ALTRO) {
@@ -36,6 +35,7 @@ public class Artista extends Personaggio {
             this.attivitaCustom = attivitaValidata;
             this.descrizioneAttivita = attivitaValidata; // Usa il testo personalizzato
         } 
+            
         else {
             
             this.attivitaCustom = null;
@@ -47,7 +47,7 @@ public class Artista extends Personaggio {
         
         if (activity == null || activity.trim().isEmpty()) {
             
-            throw new IllegalArgumentException("L'attività prevalente è obbligatoria.");
+            throw new IllegalArgumentException("Questo campo non puo essere vuoto, perfavore inserisca l'attività prevalente!");
         }
         return activity.trim();
     }
@@ -80,3 +80,4 @@ public class Artista extends Personaggio {
     
     }
 }
+
