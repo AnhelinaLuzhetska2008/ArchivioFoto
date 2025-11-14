@@ -11,10 +11,10 @@ public class Luogo extends Soggetto {
     private final String descrizione;
     
 /**
-     * Costruisce un Luogo.
+     * Costruisce Luogo
      * @param key chiave univoca (validata in Soggetto)
-     * @param nome nome del luogo (obbligatorio, trimmed)
-     * @param descrizione descrizione opzionale (può essere null)
+     * @param nome nome luogo 
+     * @param descrizione = descrizione opzionale 
      * @throws IllegalArgumentException se nome è null o vuoto
 */
 
@@ -30,7 +30,7 @@ public class Luogo extends Soggetto {
         
         if (nome == null || nome.trim().isEmpty()) {
             
-            throw new IllegalArgumentException("Il nome del luogo è obbligatorio.");
+            throw new IllegalArgumentException("\nQuesto campo è obbligatorio, perfavore inserisce il nome del luogo!");
         }
         return nome.trim();
     }
@@ -57,4 +57,5 @@ public class Luogo extends Soggetto {
     public String toString() {
         return String.format("%s - %s", super.toString(), getDescrizione());
     }
+
 }
