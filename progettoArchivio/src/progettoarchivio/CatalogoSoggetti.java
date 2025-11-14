@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * Catalogo centrale dei soggetti fotografati.
- * Implementa il pattern Singleton (lazy initialization, thread-safe).
+ * Implementa il pattern Singleton = modello generativo che garantisce l'esistenza di un solo oggetto di una classe e consente di accedere all'oggetto da qualsiasi luogo
  * Garantisce unicità delle chiavi e accesso globale.
  */
 
@@ -21,7 +21,7 @@ public final class CatalogoSoggetti {
     
     private final Map<String, Soggetto> soggetti;
 
-    /** Costruttore privato: inizializza la mappa */
+    /** Costruttore privato = inizializza la mappa */
     
     private CatalogoSoggetti() {
         
@@ -32,12 +32,12 @@ public final class CatalogoSoggetti {
     
     public static CatalogoSoggetti getInstance() {
         
-        return Holder.ISTANZA;
+        return Holder.ISTANZA;        //contenitore generico o classe wrapper in grado di memorizzare e gestire un oggetto di qualsiasi tipo
     }
 
     /**
      * Aggiunge un soggetto al catalogo.
-     * @param s soggetto da aggiungere (non null)
+     * @param s = soggetto da aggiungere 
      * @throws IllegalArgumentException se s è null o chiave già esistente
      */
     
@@ -45,23 +45,23 @@ public final class CatalogoSoggetti {
         
         if (s == null) {
             
-            throw new IllegalArgumentException("Il soggetto non può essere vuoto.");
+            throw new IllegalArgumentException("\nQuesto campo è obbligatorio, perfavore inserisca il soggetto!");
         }
         String chiave = normalizzaChiave(s.getKey());
         
         if (soggetti.containsKey(chiave)) {
             
-            throw new IllegalArgumentException("Chiave già esistente: '" + chiave + "'");
+            throw new IllegalArgumentException("\nChiave già esistente: '" + chiave + "'");
         }
         soggetti.put(chiave, s);
     }
 
     /**
-     * Cerca un soggetto per chiave (case-insensitive, trimmed).
-     * @param chiave chiave da cercare (non null, non vuota)
+     * Cerca un soggetto per chiave 
+     * @param chiave = chiave da cercare 
      * @return Soggetto corrispondente
      * @throws IllegalArgumentException se chiave invalida
-     * @throws NoSuchElementException se non trovato
+     * @throws NoSuchElementException = non trovato
      */
     
     public Soggetto trovaPerChiave(String chiave) {
@@ -71,14 +71,14 @@ public final class CatalogoSoggetti {
         
         if (s == null) {
             
-            throw new NoSuchElementException("Soggetto non trovato con chiave: '" + k + "'");
+            throw new NoSuchElementException("Soggetto non trovato con la chiave: '" + k + "'");
         }
         return s;
     }
 
     /**
      * Rimuove un soggetto dal catalogo.
-     * @param chiave chiave del soggetto da rimuovere
+     * @param chiave = chiave del soggetto da rimuovere
      * @return true se rimosso, false se non esiste
      */
     
@@ -90,8 +90,9 @@ public final class CatalogoSoggetti {
     }
 
     /**
-     * Restituisce una vista non modificabile di tutti i soggetti.
-     * @return collezione di sola lettura
+     * Restituisce una lista non modificabile di tutti i soggetti.
+     * @return collezione = di sola lettura
+     * Collections = esclusivamente da metodi statici che operano su collezioni o le restituiscono
      */
     
     public Collection<Soggetto> tuttiSoggetti() {
@@ -107,16 +108,17 @@ public final class CatalogoSoggetti {
     }
 
     /**
-     * Normalizza una chiave: trim + maiuscolo.
-     * Usata internamente per uniformità.
+     * Chiave con trim + maiuscolo.
+     * Usata per uniformità.
      */
     
     private String normalizzaChiave(String chiave) {
         
         if (chiave == null || chiave.trim().isEmpty()) {
             
-            throw new IllegalArgumentException("La chiave non può essere null o vuota.");
+            throw new IllegalArgumentException("Questo campo è obbligatorio, perfavore inserisca la chiave!");
         }
         return chiave.trim().toUpperCase();
     }
+
 }
